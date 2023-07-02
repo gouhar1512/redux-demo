@@ -49,3 +49,13 @@ case **FETCH_USERS_SUCCESS**
 case **FETCH_USERS_FAILURE**
 <br/>&emsp;&emsp;&nbsp;loading: false
 <br/>&emsp;&emsp;&nbsp;error: error (from API)
+
+### Async action creators
+
+---
+
+**axios** : Requests and API end point
+
+**redux-think**
+<br/>&nbsp; It is the standard way to define async action creators
+<br/>&nbsp; It's a Middleware

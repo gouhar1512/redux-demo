@@ -1,5 +1,6 @@
 const redux = require("redux");
 const createStore = redux.createStore;
+const combineReducers = redux.combineReducers;
 
 const BUY_CAKE = "BUY_CAKE";
 const BUY_ICECREAM = "BUY_ICECREAM";
@@ -57,7 +58,6 @@ const cakeReducer = (state = initialCakeState, action) => {
         quantity: state.quantity - 1,
       };
     default:
-      console.log("default action dispatched");
       return state;
   }
 };
@@ -70,12 +70,17 @@ const iceCreamReducer = (state = initialIceCreamState, action) => {
         quantity: state.quantity - 1,
       };
     default:
-      console.log("default action dispatched");
       return state;
   }
 };
 
-const store = createStore(reducer);
+// Convention to name comibined reducer is rootReducer
+const rootReducer = combineReducers({
+  cake: cakeReducer,
+  iceCream: iceCreamReducer,
+});
+
+const store = createStore(rootReducer);
 console.log("Initial State", store.getState());
 
 const unsubscribe = store.subscribe(() => {
@@ -87,6 +92,38 @@ store.dispatch(buyCake());
 store.dispatch(buyIceCreams());
 store.dispatch(buyIceCreams());
 unsubscribe();
+/**
+ * ======================================================================
+ * Output will be:
+ * Initial State { cake: { quantity: 10 }, iceCream: { quantity: 20 } }
+ * Updated state { cake: { quantity: 9 }, iceCream: { quantity: 20 } }
+ * Updated state { cake: { quantity: 8 }, iceCream: { quantity: 20 } }
+ * Updated state { cake: { quantity: 7 }, iceCream: { quantity: 20 } }
+ * Updated state { cake: { quantity: 7 }, iceCream: { quantity: 19 } }
+ * Updated state { cake: { quantity: 7 }, iceCream: { quantity: 18 } }
+ *
+ * ======================================================================
+ *
+ * Now we have a overall global state object where keys are the
+ * keys we provided while combininng the individual reducers.
+ * To access number of cakes it will be state.cake.quantity
+ * To access number of icecreams it will be state.iceCream.quantity
+ *
+ * ======================================================================
+ *
+ * Note: When we dispatch an action, both the reducers receive that
+ * action. The difference is one of them acts on that action whereas
+ * the other just ignores it(it's default case will be exectued).
+ *
+ * ======================================================================
+ *
+ * Caution: Since both the reducer receive that action and in case both the
+ * reducers have same Case statement, say "TEST_CASE" as of their case, and
+ * we dispatch({key:"TEST_CASE"}) then both the reducer will perform the action.
+ * So take care of such scenarios where unintentionally you would change state at multiple places.
+ *
+ * ======================================================================
+ */
 
 /**
  * REDUX PATTERN

@@ -22,8 +22,8 @@ state = {
 ```
 
 **loading** - Display a loading spinner in your component.
-**data** - List of users
-**error** - Display error to the users
+<br/>**data** - List of users
+<br/>**error** - Display error to the users
 
 ### Actions
 
@@ -40,12 +40,12 @@ We will have 3 actions in our application
 ---
 
 case **FETCH_USERS_REQUEST**
-&emsp;&emsp;&nbsp;loading: true
+<br/>&emsp;&emsp;&nbsp;loading: true
 
 case **FETCH_USERS_SUCCESS**
-&emsp;&emsp;&nbsp;loading: false
-&emsp;&emsp;&nbsp;users: data (from API)
+<br/>&emsp;&emsp;&nbsp;loading: false
+<br/>&emsp;&emsp;&nbsp;users: data (from API)
 
 case **FETCH_USERS_FAILURE**
-&emsp;&emsp;&nbsp;loading: false
-&emsp;&emsp;&nbsp;error: error (from API)
+<br/>&emsp;&emsp;&nbsp;loading: false
+<br/>&emsp;&emsp;&nbsp;error: error (from API)

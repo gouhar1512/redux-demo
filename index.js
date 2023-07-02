@@ -2,7 +2,7 @@ const redux = require("redux");
 const createStore = redux.createStore;
 
 const BUY_CAKE = "BUY_CAKE";
-const BUY_ICECREAMS = "BUY_ICECREAMS";
+const BUY_ICECREAM = "BUY_ICECREAM";
 
 function buyCake() {
   return {
@@ -13,27 +13,61 @@ function buyCake() {
 
 function buyIceCreams() {
   return {
-    type: BUY_ICECREAMS,
+    type: BUY_ICECREAM,
     info: "Second redux action",
   };
 }
 
-const initialState = {
-  numOfCakes: 10,
-  numOfIceCreams: 20,
+// const initialState = {
+//   numOfCakes: 10,
+//   numOfIceCreams: 20,
+// };
+
+// const reducer = (state = initialState, action) => {
+//   switch (action.type) {
+//     case BUY_CAKE:
+//       return {
+//         ...state,
+//         numOfCakes: state.numOfCakes - 1,
+//       };
+//     case BUY_ICECREAMS:
+//       return {
+//         ...state,
+//         numOfIceCreams: state.numOfIceCreams - 1,
+//       };
+//     default:
+//       console.log("default action dispatched");
+//       return state;
+//   }
+// };
+
+const initialCakeState = {
+  quantity: 10,
 };
 
-const reducer = (state = initialState, action) => {
+const initialIceCreamState = {
+  quantity: 20,
+};
+
+const cakeReducer = (state = initialCakeState, action) => {
   switch (action.type) {
     case BUY_CAKE:
       return {
         ...state,
-        numOfCakes: state.numOfCakes - 1,
+        quantity: state.quantity - 1,
       };
-    case BUY_ICECREAMS:
+    default:
+      console.log("default action dispatched");
+      return state;
+  }
+};
+
+const iceCreamReducer = (state = initialIceCreamState, action) => {
+  switch (action.type) {
+    case BUY_ICECREAM:
       return {
         ...state,
-        numOfIceCreams: state.numOfIceCreams - 1,
+        quantity: state.quantity - 1,
       };
     default:
       console.log("default action dispatched");
